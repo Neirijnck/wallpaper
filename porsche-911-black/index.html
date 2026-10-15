@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Porsche 911 Black Clock</title>
+    <!-- Empty icon: stops the browser requesting a favicon.ico that does not exist -->
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="scene">
+      <div class="floor"></div>
+
+      <div class="clock" aria-label="Current time">
+        <span class="clock__hours">00</span><span class="clock__colon">:</span><span class="clock__minutes">00</span>
+      </div>
+
+      <!-- Hidden until the image has loaded, so a missing car image leaves just clock and floor. -->
+      <div class="car" hidden>
+        <div class="car__shadow"></div>
+        <img class="car__reflection" alt="" />
+        <img class="car__image" alt="" />
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

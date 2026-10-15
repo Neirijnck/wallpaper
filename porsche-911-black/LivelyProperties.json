@@ -1,0 +1,77 @@
+{
+  "carImage": {
+    "type": "folderDropdown",
+    "text": "Car image",
+    "value": "car2.png",
+    "folder": "car",
+    "filter": "*.png"
+  },
+  "carHeight": {
+    "type": "slider",
+    "text": "Car size (% of screen height)",
+    "min": 20,
+    "max": 80,
+    "step": 1,
+    "value": 40
+  },
+  "carBottom": {
+    "type": "slider",
+    "text": "Car position (% above bottom edge)",
+    "min": 0,
+    "max": 40,
+    "step": 1,
+    "value": 10
+  },
+  "reflectionStrength": {
+    "type": "slider",
+    "text": "Reflection strength (%)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "value": 22
+  },
+  "clockColor": {
+    "type": "color",
+    "text": "Clock colour",
+    "value": "#C8CBD0"
+  },
+  "clockSize": {
+    "type": "slider",
+    "text": "Clock size (% of screen height)",
+    "min": 20,
+    "max": 80,
+    "step": 1,
+    "value": 44
+  },
+  "clockTop": {
+    "type": "slider",
+    "text": "Clock position (% from top edge)",
+    "min": -20,
+    "max": 60,
+    "step": 1,
+    "value": 21
+  },
+  "clockWeight": {
+    "type": "slider",
+    "text": "Clock weight (100 thin - 900 black)",
+    "min": 100,
+    "max": 900,
+    "step": 50,
+    "value": 700
+  },
+  "backgroundColor": {
+    "type": "color",
+    "text": "Background colour",
+    "value": "#1C1F24"
+  },
+  "use24Hour": {
+    "type": "checkbox",
+    "text": "24-hour clock",
+    "value": true
+  },
+  "blinkColon": {
+    "type": "checkbox",
+    "text": "Blinking colon",
+    "value": false
+  }
+}
