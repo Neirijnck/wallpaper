@@ -1,16 +1,26 @@
 /*
- * Tunable values. Everything scales with the screen height (vh), so the composition holds on
- * 16:9 and 21:9 alike. The Lively-controlled values below are overridden at runtime by
- * script.js; keep their defaults in sync with LivelyProperties.json.
+ * Tunable values. Sizes and positions are in scene units (--u), so the composition holds on 16:9, 21:9 and portrait
+ * screens alike. The Lively-controlled values below are overridden at runtime by script.js; keep their defaults in
+ * sync with LivelyProperties.json.
  */
 :root {
+  /*
+   * Scene unit: 1% of the screen height on landscape screens. On narrow (portrait) screens it follows the width
+   * instead, so the widest element still fits: the default car is about 133 units wide, so 0.7vw keeps it at 93%.
+   */
+  --u: min(1vh, 0.7vw);
+
+  /* Clock and car live on a stage 100 units high, centred vertically; on landscape screens it fills the screen. */
+  --stage-height: calc(100 * var(--u));
+  --stage-top: calc((100vh - var(--stage-height)) / 2);
+
   /* Background (Lively: backgroundColor) */
   --bg-color: #1c1f24;
   --bg-highlight: color-mix(in srgb, var(--bg-color), #ffffff 7%);
   --bg-shade: color-mix(in srgb, var(--bg-color), #000000 70%);
 
   /* Floor */
-  --horizon-height: 30vh; /* distance from the bottom of the screen */
+  --horizon-height: calc(30 * var(--u)); /* distance from the bottom of the stage */
   --horizon-line-color: rgb(255 255 255 / 16%);
   --floor-top: color-mix(in srgb, var(--bg-color), #000000 45%);
   --floor-bottom: color-mix(in srgb, var(--bg-color), #000000 85%);
@@ -18,8 +28,8 @@
 
   /* Clock (Lively: clockColor, clockSize, clockTop, clockWeight) */
   --clock-color: #c8cbd0;
-  --clock-size: 44vh;
-  --clock-top: 21vh;
+  --clock-size: calc(44 * var(--u));
+  --clock-top: calc(21 * var(--u)); /* from the top of the stage */
   --clock-weight: 700;
   --clock-tracking: -0.07em; /* tighter than Montserrat's default, so the outer digits stay over the higher part of the car */
   --clock-colon-offset: -0.17em; /* lifts the colon clear of the car roof; any higher and it pokes out above the digits */
@@ -27,12 +37,12 @@
   --clock-colon-transition: 300ms ease;
 
   /* Car (Lively: carHeight, carBottom, reflectionStrength) */
-  --car-height: 40vh;
-  --car-bottom: 10vh;
-  --car-max-width: 94vw; /* on narrower screens (16:9) the car shrinks to fit instead of running off the edges */
+  --car-height: calc(40 * var(--u));
+  --car-bottom: calc(10 * var(--u)); /* from the bottom of the stage */
+  --car-max-width: 94vw; /* a car made larger in Lively shrinks to fit instead of running off the edges */
   --reflection-strength: 0.22;
   --reflection-length: 45%; /* share of the mirrored image that stays visible */
-  --reflection-blur: 0.3vh;
+  --reflection-blur: calc(0.3 * var(--u));
   --shadow-strength: 0.9;
 }
 
@@ -75,13 +85,14 @@ body {
   overflow: hidden;
 }
 
+/* Runs from the stage's horizon down to the screen bottom, so on portrait screens it also fills the space below. */
 .floor {
   position: absolute;
+  top: calc(var(--stage-top) + var(--stage-height) - var(--horizon-height));
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 0;
-  height: var(--horizon-height);
   background:
     radial-gradient(ellipse 55% 60% at 50% 0%, var(--floor-gloss), transparent 100%),
     linear-gradient(to bottom, var(--floor-top), var(--floor-bottom));
@@ -92,7 +103,7 @@ body {
     top: 0;
     right: 0;
     left: 0;
-    height: 0.15vh;
+    height: calc(0.15 * var(--u));
     background: linear-gradient(to right, transparent, var(--horizon-line-color) 50%, transparent);
     content: '';
   }
@@ -103,10 +114,18 @@ body {
     right: 0;
     bottom: 100%;
     left: 0;
-    height: 6vh;
+    height: calc(6 * var(--u));
     background: linear-gradient(to top, rgb(255 255 255 / 3%), transparent);
     content: '';
   }
+}
+
+.stage {
+  position: absolute;
+  top: var(--stage-top);
+  right: 0;
+  left: 0;
+  height: var(--stage-height);
 }
 
 .clock {
@@ -171,7 +190,7 @@ body {
     rgb(0 0 0 / calc(var(--shadow-strength) * 55%)) 45%,
     transparent 100%
   );
-  filter: blur(0.6vh);
+  filter: blur(calc(0.6 * var(--u)));
   transform: translateY(50%);
 
   /* Tighter, darker core directly under the car */

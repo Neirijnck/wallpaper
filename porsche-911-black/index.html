@@ -12,15 +12,17 @@
     <main class="scene">
       <div class="floor"></div>
 
-      <div class="clock" aria-label="Current time">
-        <span class="clock__hours">00</span><span class="clock__colon">:</span><span class="clock__minutes">00</span>
-      </div>
+      <div class="stage">
+        <div class="clock" aria-label="Current time">
+          <span class="clock__hours">00</span><span class="clock__colon">:</span><span class="clock__minutes">00</span>
+        </div>
 
-      <!-- Hidden until the image has loaded, so a missing car image leaves just clock and floor. -->
-      <div class="car" hidden>
-        <div class="car__shadow"></div>
-        <img class="car__reflection" alt="" />
-        <img class="car__image" alt="" />
+        <!-- Hidden until the image has loaded, so a missing car image leaves just clock and floor. -->
+        <div class="car" hidden>
+          <div class="car__shadow"></div>
+          <img class="car__reflection" alt="" />
+          <img class="car__image" alt="" />
+        </div>
       </div>
     </main>
 

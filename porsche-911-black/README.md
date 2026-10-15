@@ -30,18 +30,20 @@ the colon.
 
 ## Settings
 
-All settings scale with the screen height, so they behave the same on 16:9 and 21:9. One exception: the car never gets
-wider than 94% of the screen (`--car-max-width`), so on 16:9 it can stay smaller than the car size setting.
+Sizes and positions are in scene units (`--u`): 1% of the screen height on landscape screens (16:9, 21:9). On narrow
+or portrait screens the unit follows the width instead (0.7% of it), and clock and car sit on a vertically centred
+stage, so the whole composition shrinks to fit and the floor fills the space below. The car never gets wider than 94%
+of the screen (`--car-max-width`), even when the car size setting asks for more.
 
 | Lively setting      | CSS variable            | Default    |
 | ------------------- | ----------------------- | ---------- |
 | Car image           | (image source)          | `car2.png` |
-| Car size            | `--car-height`          | 40vh       |
-| Car position        | `--car-bottom`          | 10vh       |
+| Car size            | `--car-height`          | 40 units   |
+| Car position        | `--car-bottom`          | 10 units   |
 | Reflection strength | `--reflection-strength` | 0.22       |
 | Clock colour        | `--clock-color`         | `#C8CBD0`  |
-| Clock size          | `--clock-size`          | 44vh       |
-| Clock position      | `--clock-top`           | 21vh       |
+| Clock size          | `--clock-size`          | 44 units   |
+| Clock position      | `--clock-top`           | 21 units   |
 | Clock weight        | `--clock-weight`        | 700        |
 | Background colour   | `--bg-color`            | `#1C1F24`  |
 | 24-hour clock       | (script)                | on         |

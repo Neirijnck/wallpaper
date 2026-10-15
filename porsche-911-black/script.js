@@ -11,14 +11,17 @@ const TRIM_ALPHA_THRESHOLD = 8;
 const MINUTE_MS = 60_000;
 const SECOND_MS = 1000;
 
+// Lively sliders count in scene units (--u in style.css): % of the screen height on landscape screens.
+const toSceneUnits = (value) => `calc(${value} * var(--u))`;
+
 // Lively property name -> [CSS custom property, value converter]. Defaults live in style.css.
 const CSS_PROPERTIES = {
-  carHeight: ['--car-height', (value) => `${value}vh`],
-  carBottom: ['--car-bottom', (value) => `${value}vh`],
+  carHeight: ['--car-height', toSceneUnits],
+  carBottom: ['--car-bottom', toSceneUnits],
   reflectionStrength: ['--reflection-strength', (value) => String(value / 100)],
   clockColor: ['--clock-color', String],
-  clockSize: ['--clock-size', (value) => `${value}vh`],
-  clockTop: ['--clock-top', (value) => `${value}vh`],
+  clockSize: ['--clock-size', toSceneUnits],
+  clockTop: ['--clock-top', toSceneUnits],
   clockWeight: ['--clock-weight', String],
   backgroundColor: ['--bg-color', String],
 };
