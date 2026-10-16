@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GTA Vice City Clock</title>
+    <!-- Empty icon: stops the browser requesting a favicon.ico that does not exist -->
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- The artwork, cropped to cover the screen. Clock and cutout are positioned in artwork coordinates. -->
+    <main class="artwork">
+      <img class="artwork__layer" src="img/background.webp" alt="" />
+
+      <div class="clock" aria-label="Current time">
+        <div class="clock__time">
+          <span class="clock__hours">00</span><span class="clock__colon">:</span><span class="clock__minutes">00</span>
+        </div>
+        <div class="clock__date"></div>
+      </div>
+
+      <!-- Lucia and Jason, cut out at the same size as the background, drawn in front of the clock -->
+      <img class="artwork__layer artwork__layer--front" src="img/cutouts.png" alt="" />
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+/*
+ * Tunable values. The artwork is scaled to cover the screen; the clock is sized and placed in artwork percentages, so
+ * it keeps its spot behind Lucia's head on every screen shape. The Lively-controlled values below are overridden at
+ * runtime by script.js; keep their defaults in sync with LivelyProperties.json.
+ */
+:root {
+  /* Artwork: img/background.webp and img/cutouts.png, both 3840 x 2160 */
+  --artwork-aspect: calc(16 / 9);
+  /* Share of the overflow cropped at the top on screens wider than 16:9 (0 = keep the top edge) */
+  --focus-y: 0.3;
+
+  /* Clock (Lively: clockColor, clockSize, clockX, clockY, clockWeight, showDate). Plain numbers: % of the artwork. */
+  --clock-color: #ffffff;
+  --clock-size: 26; /* digit size, % of the artwork height */
+  --clock-x: 28; /* horizontal centre, % of the artwork width; Lucia's head then covers part of the minutes */
+  --clock-y: 10; /* top edge of the date line, % of the artwork height */
+  --clock-weight: 800;
+  --clock-tracking: -0.05em;
+  --clock-shadow: 0 0.12em 0.5em rgb(70 20 90 / 45%);
+  --clock-colon-offset: -0.06em; /* centres Montserrat's colon on the digits */
+  --clock-colon-dim-opacity: 0.15;
+  --clock-colon-transition: 300ms ease;
+  --date-size: 0.16em;
+  --date-weight: 600;
+  --date-tracking: 0.08em;
+  --date-display: block; /* Lively: showDate */
+  --date-order: -1; /* -1 = above the time, 1 = below it */
+
+  /* Narrow (portrait) screens: the artwork shifts so the clock is centred, and the clock shrinks to this width */
+  --clock-max-width: 92vw;
+  --clock-width-em: 2.833; /* width of "00:00" in em at weight 800 and the tracking above (measured) */
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  /* Never flash a fallback face: the clock is the whole point of the wallpaper. */
+  font-display: block;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #000000;
+  user-select: none;
+  cursor: default;
+}
+
+.artwork {
+  --artwork-width: max(100vw, calc(100vh * var(--artwork-aspect)));
+  --artwork-height: calc(var(--artwork-width) / var(--artwork-aspect));
+
+  position: absolute;
+  top: calc((100vh - var(--artwork-height)) * var(--focus-y));
+  /* Centre the clock's column on screen as far as the artwork allows; on 16:9 and wider this is simply 0. */
+  left: clamp(calc(100vw - var(--artwork-width)), calc(50vw - var(--clock-x) / 100 * var(--artwork-width)), 0px);
+  width: var(--artwork-width);
+  height: var(--artwork-height);
+  container-type: size;
+}
+
+.artwork__layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  &.artwork__layer--front {
+    z-index: 2;
+  }
+}
+
+.clock {
+  position: absolute;
+  top: calc(var(--clock-y) * 1cqh);
+  left: calc(var(--clock-x) * 1cqw);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--clock-color);
+  font-family: 'Montserrat', sans-serif;
+  font-size: min(calc(var(--clock-size) * 1cqh), calc(var(--clock-max-width) / var(--clock-width-em)));
+  font-weight: var(--clock-weight);
+  line-height: 1;
+  text-shadow: var(--clock-shadow);
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.clock__time {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--clock-tracking);
+}
+
+.clock__colon {
+  position: relative;
+  top: var(--clock-colon-offset);
+  transition: opacity var(--clock-colon-transition);
+
+  &.clock__colon--dim {
+    opacity: var(--clock-colon-dim-opacity);
+  }
+}
+
+.clock__date {
+  display: var(--date-display);
+  order: var(--date-order);
+  margin: 0.15em 0;
+  font-size: var(--date-size);
+  font-weight: var(--date-weight);
+  letter-spacing: var(--date-tracking);
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clock__colon {
+    transition: none;
+  }
+}

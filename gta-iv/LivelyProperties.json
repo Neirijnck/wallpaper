@@ -1,0 +1,62 @@
+{
+  "clockColor": {
+    "type": "color",
+    "text": "Clock colour",
+    "value": "#FFFFFF"
+  },
+  "clockSize": {
+    "type": "slider",
+    "text": "Clock size (% of image height)",
+    "min": 10,
+    "max": 50,
+    "step": 1,
+    "value": 26
+  },
+  "clockX": {
+    "type": "slider",
+    "text": "Clock position, horizontal (% of image width)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "value": 28
+  },
+  "clockY": {
+    "type": "slider",
+    "text": "Clock position, vertical (% of image height)",
+    "min": 0,
+    "max": 70,
+    "step": 1,
+    "value": 10
+  },
+  "clockWeight": {
+    "type": "slider",
+    "text": "Clock weight (100 thin - 900 black)",
+    "min": 100,
+    "max": 900,
+    "step": 50,
+    "value": 800
+  },
+  "showDate": {
+    "type": "checkbox",
+    "text": "Show date",
+    "value": true
+  },
+  "use24Hour": {
+    "type": "checkbox",
+    "text": "24-hour clock",
+    "value": true
+  },
+  "blinkColon": {
+    "type": "checkbox",
+    "text": "Blinking colon",
+    "value": false
+  },
+  "focusY": {
+    "type": "slider",
+    "text": "Crop on wide screens (0 = keep top, 100 = keep bottom)",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "value": 30
+  }
+}
